@@ -8,7 +8,7 @@ export default function NavBar() {
       <ul className="nav-bar">
         <li className="nav-item">
           <Link to="/" className={currentPage === "/" ? "nav-link active" : "nav-link"}>
-            Cash Caddy
+            Home
           </Link>
         </li>
         <li className="nav-item">
