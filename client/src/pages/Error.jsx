@@ -1,9 +1,9 @@
 export default function Error() {
   return (
     <div>
-      <h1>Contact Me</h1>
+      <h1>Error</h1>
       <p>
-        Add more later!
+        Sorry, we ran into an issue!
       </p>
     </div>
   );

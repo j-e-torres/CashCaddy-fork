@@ -1,13 +1,14 @@
-// import { Outlet } from 'react-router-dom';
-import "./App.css";
+import { Outlet } from "react-router-dom";
 import { Header, } from "./components";
-import { Home } from "./pages";
+import "./App.css";
 
 function App() {
   return (
     <>
       <Header />
-      <Home />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 }
