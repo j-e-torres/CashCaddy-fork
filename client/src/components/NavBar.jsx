@@ -36,8 +36,8 @@ export default function NavBar() {
         </li>
         <li className="nav-item">
           <Link
-            to="SignUp"
-            className={currentPage === "/SignUp" ? "nav-link active" : "nav-link"}>
+            to="Signup"
+            className={currentPage === "/Signup" ? "nav-link active" : "nav-link"}>
             Sign Up
           </Link>
         </li>
