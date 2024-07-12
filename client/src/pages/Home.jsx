@@ -10,11 +10,13 @@ export default function Home() {
       title: "Ice-Cream",
       description: "bought tasty Ice-Cream :p",
       amount: 40,
+      categories: ["food", "treat"],
     },
     {
       title: "Peanut",
       description: "one of them...",
       amount: 0.4,
+      categories: ["treat", "NOT food"],
     },
   ]);
 
@@ -23,6 +25,7 @@ export default function Home() {
       <div className="budget">
         <h2 className="budget-title">Budget:</h2>
         <h3 className="budget-amount">{formatCost.format(budgetAmount)}</h3>
+        
         {expenses.map((expense, index) => (
           <ExpenseCard expense={expense} key={"expense" + index} />
         ))}
