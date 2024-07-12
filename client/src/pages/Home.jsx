@@ -1,15 +1,35 @@
+import { useState } from "react";
+import formatCost from "../utils/formatCost";
+import ExpenseCard from "./ExpenseCard";
+
 export default function Home() {
+  let budgetAmount = 100;
+  // Placeholder expenses list, to be replaced with db connection later on
+  const [expenses] = useState([
+    {
+      title: "Ice-Cream",
+      description: "bought tasty Ice-Cream :p",
+      amount: 40,
+      categories: ["food", "treat"],
+    },
+    {
+      title: "Peanut",
+      description: "one of them...",
+      amount: 0.4,
+      categories: ["treat", "NOT food"],
+    },
+  ]);
+
   return (
-    <main>
+    <>
       <div className="budget">
-        <h2 className="budget-title">
-          {/* Placeholder for later */}
-          Budget Title
-        </h2>
-        <h3 className="budget-amount"> 
-          $1000
-        </h3>
+        <h2 className="budget-title">Budget:</h2>
+        <h3 className="budget-amount">{formatCost.format(budgetAmount)}</h3>
+        
+        {expenses.map((expense, index) => (
+          <ExpenseCard expense={expense} key={"expense" + index} />
+        ))}
       </div>
-    </main>
+    </>
   );
 }
