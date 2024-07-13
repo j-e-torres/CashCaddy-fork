@@ -21,7 +21,7 @@ export default function Home() {
 
   let budgetAmount = 100;
   // Placeholder expenses list, to be replaced with db connection later on
-  const [expenses] = useState([
+  const [expenses, setExpense] = useState([
     {
       title: "Ice-Cream",
       description: "bought tasty Ice-Cream :p",
@@ -57,6 +57,9 @@ export default function Home() {
             <input name="titleInput" type="text" required />
             <br />
 
+            <label htmlFor="amountInput">Amount:</label><br />
+            <input name="amountInput" type="number" required /><br />
+
             <label htmlFor={descriptionId}>Description:</label>
             <br />
             <textarea
@@ -64,9 +67,13 @@ export default function Home() {
               name="descriptionInput"
               rows={4}
               cols={40}
-              required
             />
             <br />
+
+            {/* Currently, category input will have to be a stand-in for something more complicated later on */}
+            <label htmlFor="categoryInput">Categories:</label><br />
+            <input name="categoryInput" type="text" /><br />
+
             <input type="submit" value="Submit" />
           </form>
         </div>
