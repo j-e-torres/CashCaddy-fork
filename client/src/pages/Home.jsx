@@ -4,10 +4,12 @@ import formatCost from "../utils/formatCost";
 import ExpenseCard from "./ExpenseCard";
 import Modal from "react-modal";
 
-// set the modal element using its id
+// sets the root id as the id of the whole document
 Modal.setAppElement("#root");
 
 export default function Home() {
+  let budgetAmount = 100;
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -15,17 +17,32 @@ export default function Home() {
     const formData = new FormData(form);
 
     // destructure arrays out of formData object so we can check them
-    const [ title, amount, description, categories ] = formData;
-    
+    const [title, amount, description, categories] = formData;
+
     const newExpense = {
       title: title[1],
-      description: description[1],
+      description: description[1] ? description[1] : "",
       amount: parseInt(amount[1]),
       categories: categories[1].trim().split(", "), // split categories by ", " so that users can save multiple tags
-    }
+    };
 
     setExpenses([...expenses, newExpense]);
     closeModal();
+  }
+
+  function calculateBudget() {
+    // get all user made expense amounts in an array
+    const expenseArray = [];
+    expenses.forEach((expense) => expenseArray.push(expense.amount));
+
+    // add all values from resulting array into one deficit
+    const totalExpense = expenseArray.reduce((accumulator, value) => accumulator + value);
+    budgetAmount -= totalExpense;
+
+    if (budgetAmount <= 0) {
+      return "$0.00";
+    }
+    return formatCost.format(budgetAmount);
   }
 
   const descriptionId = useId();
@@ -40,7 +57,6 @@ export default function Home() {
     setIsOpen(false);
   }
 
-  let budgetAmount = 100;
   // Placeholder expenses list, to be replaced with db connection later on
   const [expenses, setExpenses] = useState([
     {
@@ -61,7 +77,7 @@ export default function Home() {
     <>
       <div className="budget">
         <h2 className="budget-title">Budget:</h2>
-        <h3 className="budget-amount">{formatCost.format(budgetAmount)}</h3>
+        <h3 className="budget-amount">{calculateBudget()}</h3>
       </div>
 
       <button onClick={openModal} id="add-expense-button">
@@ -111,5 +127,3 @@ export default function Home() {
     </>
   );
 }
-
-// ReactDOM.createRoot(<Home />, appElement);
