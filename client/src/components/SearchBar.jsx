@@ -19,7 +19,8 @@ export default function SearchBar({ setResults, expenses }) {
 
   return (
     <div className="input-wrapper">
-      <input
+      <input 
+        className="search-input"
         placeholder="Type to search..."
         value={input}
         onChange={(event) => handleChange(event.target.value)}
