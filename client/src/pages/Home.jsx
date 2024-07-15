@@ -1,5 +1,6 @@
 // import ReactDOM from "react-dom";
 import { useState, useId } from "react";
+import { SearchBar, SearchResultsList } from "../components";
 import { calculateBudget } from "../utils/";
 import ExpenseCard from "./ExpenseCard";
 import Modal from "react-modal";
@@ -25,7 +26,7 @@ export default function Home() {
       title: title[value],
       description: description[value] ? description[value] : "",
       amount: parseInt(amount[value]),
-      categories: categories[value].trim().split(", "), // split categories by ", " so that users can save multiple tags
+      categories: categories[value].toLowerCase().split(",").trim(), // split categories by ", " so that users can save multiple tags
     };
 
     setExpenses([...expenses, newExpense]);
@@ -59,6 +60,8 @@ export default function Home() {
       categories: ["treat", "NOT food"],
     },
   ]);
+
+  const [results, setResults] = useState([]);
 
   return (
     <>
@@ -106,6 +109,8 @@ export default function Home() {
         </div>
       </Modal>
 
+      <SearchBar setResults={setResults} expenses={expenses}/>
+      <SearchResultsList results={results} />
       <div className="expense-list">
         {expenses.map((expense, index) => (
           <ExpenseCard expense={expense} key={"expense" + index} />

@@ -1,3 +1,5 @@
 import Header from './Header';
+import SearchBar from './SearchBar';
+import SearchResultsList from './SearchResultsList';
 
-export { Header };
+export { Header, SearchBar, SearchResultsList };
