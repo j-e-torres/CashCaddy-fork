@@ -1,6 +1,6 @@
 // import ReactDOM from "react-dom";
 import { useState, useId } from "react";
-import formatCost from "../utils/formatCost";
+import { calculateBudget } from "../utils/";
 import ExpenseCard from "./ExpenseCard";
 import Modal from "react-modal";
 
@@ -8,41 +8,28 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 
 export default function Home() {
-  let budgetAmount = 100;
+  let arbitraryAmount = 100;
+  let budgetAmount = arbitraryAmount;
 
   function handleSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
     const formData = new FormData(form);
+    const value = 1; // index for value of items in formData
 
     // destructure arrays out of formData object so we can check them
     const [title, amount, description, categories] = formData;
 
     const newExpense = {
-      title: title[1],
-      description: description[1] ? description[1] : "",
-      amount: parseInt(amount[1]),
-      categories: categories[1].trim().split(", "), // split categories by ", " so that users can save multiple tags
+      title: title[value],
+      description: description[value] ? description[value] : "",
+      amount: parseInt(amount[value]),
+      categories: categories[value].trim().split(", "), // split categories by ", " so that users can save multiple tags
     };
 
     setExpenses([...expenses, newExpense]);
     closeModal();
-  }
-
-  function calculateBudget() {
-    // get all user made expense amounts in an array
-    const expenseArray = [];
-    expenses.forEach((expense) => expenseArray.push(expense.amount));
-
-    // add all values from resulting array into one deficit
-    const totalExpense = expenseArray.reduce((accumulator, value) => accumulator + value);
-    budgetAmount -= totalExpense;
-
-    if (budgetAmount <= 0) {
-      return "$0.00";
-    }
-    return formatCost.format(budgetAmount);
   }
 
   const descriptionId = useId();
@@ -77,7 +64,7 @@ export default function Home() {
     <>
       <div className="budget">
         <h2 className="budget-title">Budget:</h2>
-        <h3 className="budget-amount">{calculateBudget()}</h3>
+        <h3 className="budget-amount">{calculateBudget(budgetAmount, expenses)}</h3>
       </div>
 
       <button onClick={openModal} id="add-expense-button">
