@@ -7,7 +7,7 @@ export default function SearchBar({ setResults, transactions }) {
 
   const fetchData = (value) => {
     const results = transactions.filter((transaction) => {
-      return value && transaction.category.includes(value.toLowerCase());
+      return value && transaction.category.toLowerCase().includes(value.toLowerCase());
     });
     setResults(results);
   };
