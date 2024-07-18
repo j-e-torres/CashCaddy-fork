@@ -4,15 +4,9 @@ import financingImage from "../images/Financing-1.jpg";
 
 const Home = () => {
   return (
-    <div className="home-body mb-5">
-      <div className="text-center">
-        <h1 className="home-title">Control Your Budget</h1>
-        <img
-          className="budget-image img-fluid shadow mb-3"
-          src={financingImage}
-          alt="budget-pic"
-          style={{ maxWidth: "100%" }}
-        />
+    <div className="home-body mb-5" style={{backgroundImage: `url(${financingImage})`, backgroundSize: 'cover', height: '100vh'}}>
+      <div className="text-center" style={{position: 'relative', top: '50%', transform: 'translateY(-50%)'}}>
+        <h1 className="home-title" style={{fontSize: '4em', color: '#fff', textShadow: '-2px 0 purple, 0 2px purple, 2px 0 purple, 0 -2px purple'}}>Welcome to CashCady</h1>
       </div>
     </div>
   );
