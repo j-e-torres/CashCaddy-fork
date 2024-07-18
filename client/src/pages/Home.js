@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBar from "../components/SearchBar";
 import "../styles/Home.css";
 import trend from "../images/trend.png";
 import transactions from "../images/transactions.png";
