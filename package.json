@@ -2,7 +2,7 @@
   "name": "expense-tracker-app",
   "version": "1.0.0",
   "engines": {
-    "node": "20.x"
+    "node": ">=12"
   },
   "description": "",
   "main": "server/server.js",
