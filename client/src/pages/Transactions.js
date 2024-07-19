@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import SearchBar from "../components/SearchBar";
+import SearchResultsList from "../components/SearchResultsList";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME, QUERY_TRANSACTIONS } from "../utils/queries";
 import { DELETE_TRANSACTION, ADD_TRANSACTION } from "../utils/mutations";
@@ -11,6 +13,10 @@ import "../styles/Transactions.css";
 
 const Transactions = ({ transactions, setTransactions }) => {
   const [showTransactionForm, setShowTransactionForm] = useState(false);
+
+  // state for search results
+  const [results, setResults] = useState([]);
+
   // const [transactionList, setTransactionList] = useState([]);
   const [transactionFormState, setTransactionFormState] = useState({
     date: "",
@@ -20,9 +26,7 @@ const Transactions = ({ transactions, setTransactions }) => {
     description: "",
   });
   // uses moment.js to set start of current week starting on sunday formatted MM/DD/YYYY
-  const [startDate, setStartDate] = useState(
-    moment().startOf("week").format("L")
-  );
+  const [startDate, setStartDate] = useState(moment().startOf("week").format("L"));
 
   // uses moment.js to set end of current week ending on saturday formatted MM/DD/YYYY
   const [endDate, setEndDate] = useState(moment().endOf("week").format("L"));
@@ -202,10 +206,11 @@ const Transactions = ({ transactions, setTransactions }) => {
 
       <div className="mt-5 text-center">
         <h1 id="transaction-table-header">Your Transactions</h1>
+        <SearchBar setResults={setResults} transactions={transactions} />
+        <SearchResultsList results={results} />
         <button
           className="btn add-transaction-button"
-          onClick={() => setShowTransactionForm(!showTransactionForm)}
-        >
+          onClick={() => setShowTransactionForm(!showTransactionForm)}>
           Add Transaction
         </button>
         {showTransactionForm && (

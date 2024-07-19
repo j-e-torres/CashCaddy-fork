@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
+import SearchBar from "../components/SearchBar";
 import "../styles/Home.css";
 import financingImage from "../images/Financing-1.jpg";
 
